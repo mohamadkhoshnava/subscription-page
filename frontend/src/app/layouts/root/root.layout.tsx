@@ -28,14 +28,8 @@ export function RootLayout() {
                 })
             }
 
-            // Set default language if no language is stored in localStorage
-            const defaultLanguage = rootDiv.dataset.defaultLanguage
-            if (defaultLanguage && ['en', 'fa', 'ru'].includes(defaultLanguage)) {
-                const storedLanguage = localStorage.getItem('i18nextLng')
-                if (!storedLanguage) {
-                    i18n.changeLanguage(defaultLanguage)
-                }
-            }
+            // Note: Default language is now handled in i18n configuration
+            // This ensures the server's default language is used when no user preference exists
         }
     }, [])
 

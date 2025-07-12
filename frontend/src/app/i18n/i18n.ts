@@ -16,10 +16,25 @@ const getDefaultLanguage = (): string => {
     return 'en' // fallback to English
 }
 
+// Check if user has a stored language preference
+const getStoredLanguage = (): string | null => {
+    return localStorage.getItem('i18nextLng')
+}
+
+// Determine initial language: use stored preference if exists, otherwise use server default
+const getInitialLanguage = (): string => {
+    const storedLang = getStoredLanguage()
+    if (storedLang && ['en', 'fa', 'ru'].includes(storedLang)) {
+        return storedLang
+    }
+    return getDefaultLanguage()
+}
+
 i18n.use(initReactI18next)
     .use(LanguageDetector)
     .use(HttpApi)
     .init({
+        lng: getInitialLanguage(), // Set initial language directly
         fallbackLng: getDefaultLanguage(),
         debug: process.env.NODE_ENV === 'development',
         defaultNS: ['main'],

@@ -172,6 +172,7 @@ export class RootService {
                 metaDescription: this.configService
                     .getOrThrow<string>('META_DESCRIPTION')
                     .replace(/^"|"$/g, ''),
+                defaultLanguage: this.configService.get<string>('DEFAULT_LANGUAGE') || 'en',
                 panelData: Buffer.from(JSON.stringify(subscriptionData)).toString('base64'),
             });
         } catch (error) {

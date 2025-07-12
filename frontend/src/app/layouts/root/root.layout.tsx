@@ -27,6 +27,15 @@ export function RootLayout() {
                     subscription: subscription.response
                 })
             }
+
+            // Set default language if no language is stored in localStorage
+            const defaultLanguage = rootDiv.dataset.defaultLanguage
+            if (defaultLanguage && ['en', 'fa', 'ru'].includes(defaultLanguage)) {
+                const storedLanguage = localStorage.getItem('i18nextLng')
+                if (!storedLanguage) {
+                    i18n.changeLanguage(defaultLanguage)
+                }
+            }
         }
     }, [])
 

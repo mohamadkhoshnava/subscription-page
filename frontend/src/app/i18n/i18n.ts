@@ -3,11 +3,24 @@ import { initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
 import i18n from 'i18next'
 
+// Get default language from HTML data attribute
+const getDefaultLanguage = (): string => {
+    const rootDiv = document.getElementById('root')
+    if (rootDiv && rootDiv.dataset.defaultLanguage) {
+        const defaultLang = rootDiv.dataset.defaultLanguage
+        // Validate that it's one of the supported languages
+        if (['en', 'fa', 'ru'].includes(defaultLang)) {
+            return defaultLang
+        }
+    }
+    return 'en' // fallback to English
+}
+
 i18n.use(initReactI18next)
     .use(LanguageDetector)
     .use(HttpApi)
     .init({
-        fallbackLng: 'en',
+        fallbackLng: getDefaultLanguage(),
         debug: process.env.NODE_ENV === 'development',
         defaultNS: ['main'],
         ns: ['main'],

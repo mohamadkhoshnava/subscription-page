@@ -24,6 +24,13 @@ export const configSchema = z
 
         META_TITLE: z.string(),
         META_DESCRIPTION: z.string(),
+        
+        DEFAULT_LANGUAGE: z
+            .string()
+            .default('en')
+            .refine((val) => ['en', 'fa', 'ru'].includes(val), {
+                message: 'DEFAULT_LANGUAGE must be one of: en, fa, ru',
+            }),
     })
     .superRefine((data, ctx) => {
         if (

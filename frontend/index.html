@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="<%= defaultLanguage %>" dir="<%= defaultLanguage === 'fa' ? 'rtl' : 'ltr' %>">
     <head>
         <meta charset="UTF-8" />
 
@@ -25,7 +25,7 @@
         <title><%= metaTitle %></title>
     </head>
     <body>
-        <div id="root" data-panel="<%- panelData %>"></div>
+        <div id="root" data-panel="<%- panelData %>" data-default-language="<%= defaultLanguage %>"></div>
         <script type="module" src="./src/main.tsx"></script>
     </body>
 </html>
